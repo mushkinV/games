@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    // Слой для стен
+    public LayerMask wallLayer;
+
+    private bool isOnWall = false;
 
     private void Start()
     {
@@ -30,45 +34,72 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * speed, rb.linearVelocity.y);
-        if (facingRight == false && moveInput > 0)
+
+        // Проверка на застревание на стене
+        if (IsOnWall())
+        {
+            isOnWall = true;
+            Debug.Log("На стене");
+            // Скользить по стене вниз
+            if (!isGrounded)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -speed * Time.deltaTime));
+                Debug.Log("Скользим вниз");
+            }
+        }
+        else
+        {
+            isOnWall = false;
+            Debug.Log("Не на стене");
+        }
+
+        if (!facingRight && moveInput > 0)
         {
             Flip();
         }
-        else if (facingRight == true && moveInput < 0)
+        else if (facingRight && moveInput < 0)
         {
             Flip();
         }
-        
     }
 
     private void Update()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, wnatIsGround);
 
-        if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.linearVelocity = Vector2.up * jumpForce;
             anim.SetTrigger("takeOF");
-
-        }
-        if (isGrounded == true)
-        {
-            anim.SetBool("isJumping", false);
-        }
-        else
-        {
-            anim.SetBool("isJumping", true);
         }
 
+        anim.SetBool("isJumping", !isGrounded);
     }
 
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
+        Vector3 scaler = transform.localScale;
+        scaler.x *= -1;
+        transform.localScale = scaler;
+    }
 
-       
+    bool IsOnWall()
+    {
+        // Проверка наличия стены слева или справа
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, wallLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, wallLayer);
+
+        // Отладочные сообщения
+        if (hitLeft.collider != null)
+        {
+            Debug.Log("Стена слева");
+        }
+        if (hitRight.collider != null)
+        {
+            Debug.Log("Стена справа");
+        }
+
+        return (hitLeft.collider != null && moveInput < 0) || (hitRight.collider != null && moveInput > 0);
     }
 }

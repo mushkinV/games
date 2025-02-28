@@ -157,6 +157,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -547,7 +560,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pngwing.com_0: 8832167503239892954
+      pngwing.com_1: -4853055123583119345
+      pngwing.com_10: 1601607523953437113
+      pngwing.com_11: -3904339871707083991
+      pngwing.com_12: 6769296415379653404
+      pngwing.com_13: 1350794326467996276
+      pngwing.com_14: 7268735396180752259
+      pngwing.com_15: 856210291696287465
+      pngwing.com_16: 5585558840886206792
+      pngwing.com_2: -8761483511772326392
+      pngwing.com_3: -2217898423111697461
+      pngwing.com_4: -9017237249179667717
+      pngwing.com_5: -8148006739367046648
+      pngwing.com_6: -8857251832463710051
+      pngwing.com_7: 6494218633340668182
+      pngwing.com_8: -1166568221208786990
+      pngwing.com_9: 2203682779147241771
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
