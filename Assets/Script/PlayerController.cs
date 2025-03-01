@@ -36,30 +36,22 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveInput * speed, rb.linearVelocity.y);
 
         // Проверка на застревание на стене
-        if (IsOnWall())
+        if (facingRight == false && moveInput > 0)
         {
-            isOnWall = true;
-            Debug.Log("На стене");
-            // Скользить по стене вниз
-            if (!isGrounded)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -speed * Time.deltaTime));
-                Debug.Log("Скользим вниз");
-            }
+            Flip();
         }
-        else
+        else if(facingRight == true && moveInput < 0) 
         {
-            isOnWall = false;
-            Debug.Log("Не на стене");
+            Flip();
         }
 
-        if (!facingRight && moveInput > 0)
+        if (moveInput == 0)
         {
-            Flip();
+            anim.SetBool("isRunning", false);
         }
-        else if (facingRight && moveInput < 0)
+        else 
         {
-            Flip();
+            anim.SetBool("isRunning", true);
         }
     }
 
@@ -73,8 +65,17 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("takeOF");
         }
 
-        anim.SetBool("isJumping", !isGrounded);
-    }
+        if (isGrounded == true)
+        {
+            anim.SetBool("isJumping", false);
+        }
+        else
+        {
+            anim.SetBool("isJumping", true);
+        }
+
+        
+    } 
 
     void Flip()
     {
