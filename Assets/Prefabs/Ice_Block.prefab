@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6581842476537201039}
   - component: {fileID: 1579259159262212541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7909642040718511000}
   - component: {fileID: 6052716158255347255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ice_Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
